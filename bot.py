@@ -26,6 +26,9 @@ is_online = True
 
 
 async def already_answered_poller():
+    for i in ADMIN_IDS:
+        try:await bot.send_message(i, "👌 Запустили бота")
+        except:pass
     while True:
         now = datetime.datetime.now()
 
@@ -109,6 +112,7 @@ dp.include_router(router)
 
 
 async def main():
+    
     asyncio.create_task(already_answered_poller())
     await dp.start_polling(bot)
 
