@@ -33,7 +33,7 @@ async def already_answered_poller():
         now = datetime.datetime.now()
 
         for user_id in list(already_answered):
-            if (now - already_answered[user_id]).total_seconds() > 5:
+            if (now - already_answered[user_id]).total_seconds() > 3600:
                 already_answered.pop(user_id)
                 print(f"Removed {user_id}")
 
@@ -44,10 +44,6 @@ async def already_answered_poller():
 
         await asyncio.sleep(10)
 
-
-@router.business_connection()
-async def business_connect(update: types.Update):
-    pass
 
 
 @router.callback_query(F.data.startswith("support:urgent"))
